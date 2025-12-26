@@ -9,3 +9,4 @@ resources:
   - external-secrets.yaml
   - vault.yaml
   - gateway.yaml
+  - system.yaml
