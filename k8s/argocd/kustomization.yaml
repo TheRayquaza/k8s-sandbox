@@ -1,6 +1,6 @@
 kind: Kustomization
 resources:
-  - ingress.yaml
+#  - ingress.yaml
   - namespace.yaml
   - install.yaml
   - apps

@@ -26,27 +26,178 @@ spec:
       chart: cilium
       targetRevision: 1.18.5
       helm:
-        values:
+        valuesObject:
+          # -------------------------------------------------------------------
+          # Hubble Relay & UI
+          # -------------------------------------------------------------------
           hubble:
             relay:
               enabled: true
             ui:
               enabled: true
 
+          # -------------------------------------------------------------------
+          # NodePort / Services
+          # -------------------------------------------------------------------
           nodePort:
-            enabled: true # for gateway api - https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/
+            enableHealthCheck: true
+            enableHealthCheckLoadBalancerIP: false
+            bindProtection: true
+          serviceNoBackendResponse: reject
 
-          l7Proxy:
-            enabled: true
+          enableInternalTrafficPolicy: true
           
-          # TODO: verify
-          cluster-pool-ipv4-cidr: "10.0.0.0/16"
-          cluster-pool-ipv6-cidr: "fdfd:fc00:aaaa:bbbb::/64"
-          enable-masquerade-to-route-source: true
-          bpf.masquerade: true
-          enable-ipv6-masquerade: true
-          enable-ipv4-masquerade: true
-          kubeProxyReplacement: "strict"
-    - repoURL: git@github.com:TheRayquaza/k8s-sandbox.git
+          # -------------------------------------------------------------------
+          # Gateway API
+          # -------------------------------------------------------------------
+          gatewayAPI:
+            enabled: true
+
+          # -------------------------------------------------------------------
+          # Core cluster identity
+          # -------------------------------------------------------------------
+          cluster:
+            id: 0
+            name: default
+
+          # -------------------------------------------------------------------
+          # Kubernetes integration
+          # -------------------------------------------------------------------
+          k8s:
+            requireIPv4PodCIDR: false
+            requireIPv6PodCIDR: false
+
+          # -------------------------------------------------------------------
+          # kube-proxy replacement
+          # -------------------------------------------------------------------
+          kubeProxyReplacement: false
+
+          # -------------------------------------------------------------------
+          # IPAM
+          # -------------------------------------------------------------------
+          ipam:
+            mode: cluster-pool
+            operator:
+              clusterPoolIPv4PodCIDRList: ["10.0.0.0/16"]
+              clusterPoolIPv4MaskSize: 24
+
+          ipv4NativeRoutingCIDR: 10.0.0.0/8
+
+          # -------------------------------------------------------------------
+          # Networking mode
+          # -------------------------------------------------------------------
+          routingMode: tunnel
+          tunnelProtocol: vxlan
+          autoDirectNodeRoutes: false
+          directRoutingSkipUnreachable: false
+
+          # -------------------------------------------------------------------
+          # IPv4 / IPv6
+          # -------------------------------------------------------------------
+          enableIPv4: true
+          enableIPv6: false
+
+          enableIPv4Masquerade: true
+          enableIPv6Masquerade: false
+
+          # -------------------------------------------------------------------
+          # BPF & datapath
+          # -------------------------------------------------------------------
+          bpf:
+            root: /sys/fs/bpf
+            masquerade: true
+            mapDynamicSizeRatio: 0.0025
+            preallocateMaps: false
+            lb:
+              acceleration: disabled
+              mapMax: 65536
+              algorithmAnnotation: false
+              modeAnnotation: false
+              sock: false
+              externalClusterIP: false
+              sourceRangeAllTypes: false
+
+              enableBPFMasquerade: true
+              enableBPFClockProbe: false
+
+              datapathMode: veth
+              enableTCX: true
+
+          # -------------------------------------------------------------------
+          # CNI
+          # -------------------------------------------------------------------
+          cni:
+            exclusive: true
+            customConf: false
+            logFile: /var/run/cilium/cilium-cni.log
+            writeCNIConfWhenReady: /host/etc/cni/net.d/05-cilium.conflist
+
+          # -------------------------------------------------------------------
+          # Policy
+          # -------------------------------------------------------------------
+          k8sNetworkPolicy:
+            enabled: true
+          enableNonDefaultDenyPolicies: true
+          daemon:
+            enableSourceIPVerification: true
+
+          # -------------------------------------------------------------------
+          # Node handling
+          # -------------------------------------------------------------------
+          agentNotReadyTaintKey: node.cilium.io/agent-not-ready
+          synchronizeK8sNodes: true
+
+          # -------------------------------------------------------------------
+          # Masquerading & iptables
+          # -------------------------------------------------------------------
+          iptablesRandomFully: false
+          installNoConntrackIptablesRules: false
+
+          # -------------------------------------------------------------------
+          # L7 / Envoy
+          # -------------------------------------------------------------------
+          l7Proxy: true
+
+          envoy:
+            baseID: 0
+            accessLogBufferSize: 4096
+            keepCapNetBindService: false
+
+          # -------------------------------------------------------------------
+          # DNS proxy / FQDN
+          # -------------------------------------------------------------------
+          dnsProxy:
+            socketLingerTimeout: 10
+
+          # -------------------------------------------------------------------
+          # Identity management
+          # -------------------------------------------------------------------
+          identityAllocationMode: crd
+          identityManagementMode: agent
+
+          # -------------------------------------------------------------------
+          # Health checking
+          # -------------------------------------------------------------------
+          healthCheckICMPFailureThreshold: 3
+
+          # -------------------------------------------------------------------
+          # Metrics & monitoring
+          # -------------------------------------------------------------------
+          monitor:
+            enabled: true
+
+          # -------------------------------------------------------------------
+          # Operator
+          # -------------------------------------------------------------------
+          operator:
+            nodeGCInterval: 5m
+
+          # -------------------------------------------------------------------
+          # SCTP / VTEP
+          # -------------------------------------------------------------------
+          enableSCTP: false
+          enableVTEP: false
+
+    - repoURL: https://github.com/TheRayquaza/k8s-sandbox.git
       targetRevision: HEAD
       path: k8s/cilium
