@@ -1,0 +1,32 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kata
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: kata
+spec:
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+  destination:
+    name: in-cluster
+    namespace: kube-system
+  source:
+    repoURL: oci://ghcr.io/kata-containers/kata-deploy-charts/kata-deploy
+    chart: kata-deploy
+    targetRevision: 3.24.0
+    helm:
+      values:
+        k8sDistribution: "k8s"
+        runtimeClass:
+          enabled: true

@@ -1,0 +1,52 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cilium
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: cilium
+spec:
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+  destination:
+    name: in-cluster
+    namespace: kube-system
+  sources:
+    - repoURL: https://helm.cilium.io/
+      chart: cilium
+      targetRevision: 1.18.5
+      helm:
+        values:
+          hubble:
+            relay:
+              enabled: true
+            ui:
+              enabled: true
+
+          nodePort:
+            enabled: true # for gateway api - https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/
+
+          l7Proxy:
+            enabled: true
+          
+          # TODO: verify
+          cluster-pool-ipv4-cidr: "10.0.0.0/16"
+          cluster-pool-ipv6-cidr: "fdfd:fc00:aaaa:bbbb::/64"
+          enable-masquerade-to-route-source: true
+          bpf.masquerade: true
+          enable-ipv6-masquerade: true
+          enable-ipv4-masquerade: true
+          kubeProxyReplacement: "strict"
+    - repoURL: git@github.com:TheRayquaza/k8s-sandbox.git
+      targetRevision: HEAD
+      path: k8s/cilium

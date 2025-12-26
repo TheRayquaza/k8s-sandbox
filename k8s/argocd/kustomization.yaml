@@ -1,0 +1,10 @@
+kind: Kustomization
+api: kustomize.config.k8s.io/v1beta1
+metadata:
+  name: argocd
+resources:
+  - ingress.yaml
+  - namespace.yaml
+  - install.yaml
+  - apps
+  - patch-argocd-ssh-cm.yaml
