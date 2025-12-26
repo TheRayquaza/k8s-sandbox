@@ -8,7 +8,7 @@ spec:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: cert-manager
 
   syncPolicy:

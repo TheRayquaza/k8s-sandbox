@@ -8,7 +8,7 @@ spec:
   annotations:
     argocd.argoproj.io/sync-wave: "1" # after es
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: vault
 
   syncPolicy:

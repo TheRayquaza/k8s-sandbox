@@ -10,7 +10,7 @@ spec:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: metallb-system
 
   syncPolicy:
@@ -22,13 +22,6 @@ spec:
       - ServerSideApply=true
 
   sources:
-  - repoURL: https://metallb.github.io/metallb
-    chart: crds
-    targetRevision: v0.13.10
-    helm:
-      releaseName: metallb-crds
-      skipCrds: false
-
   - repoURL: https://metallb.github.io/metallb
     chart: metallb
     targetRevision: v0.13.10
