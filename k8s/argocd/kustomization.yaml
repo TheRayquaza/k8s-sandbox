@@ -4,4 +4,3 @@ resources:
   - namespace.yaml
   - install.yaml
   - apps
-  - patch-argocd-ssh-cm.yaml
