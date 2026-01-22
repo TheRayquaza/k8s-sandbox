@@ -14,4 +14,4 @@ resources:
   - argocd-server.yaml
   - argocd-redis.yaml
 
-  - https://github.com/argoproj/argo-cd/manifests/crds\?ref\=stable # external CRDs
+  - https://github.com/argoproj/argo-cd/manifests/crds?ref=stable # external CRDs
