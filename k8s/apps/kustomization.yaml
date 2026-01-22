@@ -10,3 +10,4 @@ resources:
   - vault.yaml
   - gateway.yaml
   - system.yaml
+  - local-path-provisioner.yaml
