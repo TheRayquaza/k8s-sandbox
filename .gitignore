@@ -3,3 +3,5 @@ argocd-repo.yaml
 # Ansible directories
 ansible/inventories/
 ansible/kubeconfigs/
+ansible/host_vars/
+ansible/group_vars/
