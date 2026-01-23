@@ -5,3 +5,15 @@ ansible/inventories/
 ansible/kubeconfigs/
 ansible/host_vars/
 ansible/group_vars/
+
+# Terraform directories
+terraform/**/.terraform/
+terraform/**/terraform.tfstate
+terraform/**/terraform.tfstate.backup
+terraform/**/crash.log
+terraform/**/override.tf
+terraform/**/override.tf.json
+terraform/**/*.tfvars
+terraform/**/generated.tf
+terraform/**/*.tfplan
+# .terraform.lock.hcl is required to ensure consistent provider versions
