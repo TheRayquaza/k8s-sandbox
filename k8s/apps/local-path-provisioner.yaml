@@ -38,7 +38,7 @@ spec:
 
         helperImage:
           repository: busybox
-          tag: latest
+          tag: "1.36.1"
 
         defaultSettings:
           registrySecret: ~
