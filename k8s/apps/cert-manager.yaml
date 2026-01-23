@@ -39,7 +39,7 @@ spec:
             useAppArmor: true
           logLevel: 2
           leaderElection:
-            namespace: "kube-system"
+            namespace: "cert-manager"
 
         crds:
           enabled: true
@@ -48,6 +48,8 @@ spec:
         webhook:
           networkPolicy:
             enabled: true
+          timeoutSeconds: 10
+          hostNetwork: false
 
         serviceAccount:
           create: true
@@ -106,6 +108,9 @@ spec:
           image:
             repository: quay.io/jetstack/cert-manager-startupapicheck
             pullPolicy: IfNotPresent
+        
+        cainjector:
+          enabled: true
 
   - repoURL: https://github.com/TheRayquaza/k8s-sandbox.git
     targetRevision: main
