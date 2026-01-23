@@ -1,12 +1,25 @@
 kind: Kustomization
 resources:
   - apps.yaml
+
+  # GitOps
   - argocd.yaml
-  - cilium.yaml
-  - kata.yaml
-  - cert-manager.yaml
-  - metallb.yaml
+
+  # Secrets
   - external-secrets.yaml
+  - cert-manager.yaml
   - vault.yaml
+
+  # Networking
   - gateway.yaml
+  - cilium.yaml
+
+  # System
+  - metallb.yaml
   - system.yaml
+
+  # CSI
+  - local-path-provisioner.yaml
+
+  # CRI
+  - kata.yaml
