@@ -1,7 +1,7 @@
 ---
 - name: Setup Containerd
   hosts:
-    - master
+    - ssh.rayq.app
   become: yes
   roles:
     - containerd
@@ -12,7 +12,7 @@
 
 - name: Setup Network
   hosts:
-    - master
+    - ssh.rayq.app
   become: yes
   roles:
     - network
@@ -23,7 +23,7 @@
 
 - name: Setup K8S
   hosts:
-    - master
+    - ssh.rayq.app
   become: yes
   roles:
     - kubeadm
@@ -31,3 +31,13 @@
     - k8s
     - all
     - kubeadm
+
+- name: Setup WireGuard
+  hosts:
+    - ssh.rayq.app
+  become: yes
+  roles:
+    - wg
+  tags:
+    - all
+    - wg
