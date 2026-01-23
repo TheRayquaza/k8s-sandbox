@@ -13,13 +13,13 @@ spec:
   ingress:
     - from: # Allow probe
         - ipBlock:
-            cidr: 10.42.0.0/16
+            cidr: 10.96.0.0/16
       ports:
         - protocol: TCP
           port: 9403
     - from: # Allow metrics
         - ipBlock:
-            cidr: 10.42.0.0/16
+            cidr: 10.96.0.0/16
       ports:
         - protocol: TCP
           port: 9402
@@ -50,13 +50,13 @@ spec:
   ingress:
     - from: # Allow probe
         - ipBlock:
-            cidr: 10.42.0.0/16
+            cidr: 10.96.0.0/16
       ports:
         - protocol: TCP
           port: 9403
     - from: # Allow metrics
         - ipBlock:
-            cidr: 10.42.0.0/16
+            cidr: 10.96.0.0/16
       ports:
         - protocol: TCP
           port: 9402
