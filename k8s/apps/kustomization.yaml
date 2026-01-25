@@ -5,7 +5,6 @@ resources:
   - cilium.yaml
   - kata.yaml
   - cert-manager.yaml
-  - metallb.yaml
   - external-secrets.yaml
   - vault.yaml
   - gateway.yaml
