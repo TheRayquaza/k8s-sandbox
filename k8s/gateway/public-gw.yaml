@@ -6,6 +6,9 @@ metadata:
   namespace: default
 spec:
   gatewayClassName: cilium
+  infrastructure:
+    annotations:
+      metallb.io/address-pool: "public-pool"
   listeners:
     - name: https
       port: 443
