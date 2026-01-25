@@ -22,7 +22,7 @@ spec:
   sources:
   - repoURL: https://charts.jetstack.io
     chart: cert-manager
-    targetRevision: v1.18.2
+    targetRevision: v1.19.2
     helm:
       releaseName: cert-manager
       skipCrds: false
@@ -47,7 +47,7 @@ spec:
 
         webhook:
           networkPolicy:
-            enabled: true
+            enabled: false
           timeoutSeconds: 10
           hostNetwork: false
 
@@ -60,10 +60,6 @@ spec:
 
         featureGates: ""
         maxConcurrentChallenges: 60
-
-        image:
-          repository: quay.io/jetstack/cert-manager-controller
-          pullPolicy: IfNotPresent
 
         namespace: cert-manager
 
@@ -83,33 +79,9 @@ spec:
             drop: ["ALL"]
           readOnlyRootFilesystem: true
 
-        livenessProbe:
-          enabled: true
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 15
-          successThreshold: 1
-          failureThreshold: 8
-
         enableServiceLinks: false
 
         prometheus:
-          enabled: true
-
-        acmesolver:
-          image:
-            repository: quay.io/jetstack/cert-manager-acmesolver
-            pullPolicy: IfNotPresent
-
-        startupapicheck:
-          enabled: true
-          timeout: 1m
-          backoffLimit: 4
-          image:
-            repository: quay.io/jetstack/cert-manager-startupapicheck
-            pullPolicy: IfNotPresent
-        
-        cainjector:
           enabled: true
 
   - repoURL: https://github.com/TheRayquaza/k8s-sandbox.git
