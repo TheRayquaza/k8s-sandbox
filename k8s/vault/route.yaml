@@ -7,6 +7,7 @@ spec:
   parentRefs:
     - name: private-gateway
       namespace: default
+      sectionName: vault-https
   hostnames:
     - vault.internal.rayq.app
   rules:
