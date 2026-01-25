@@ -1,4 +1,3 @@
----
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -10,15 +9,50 @@ spec:
     annotations:
       io.cilium/lb-ipam-ips: "10.20.0.1"
   listeners:
-    - name: https
+    - name: argocd-https
       port: 443
       protocol: HTTPS
-      hostname: "*.internal.rayq.app"
+      hostname: "argocd.internal.rayq.app"
       tls:
         mode: Terminate
         certificateRefs:
-          - name: rayq-wildcard-tls
+          - name: argocd-tls-secret
             kind: Secret
       allowedRoutes:
         namespaces:
-          from: All
+          from: Selector
+          selector:
+            matchLabels:
+              kubernetes.io/metadata.name: argocd
+
+    - name: hubble-https
+      port: 443
+      protocol: HTTPS
+      hostname: "hubble.internal.rayq.app"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: hubble-tls-secret
+            kind: Secret
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+
+    - name: vault-https
+      port: 443
+      protocol: HTTPS
+      hostname: "vault.internal.rayq.app"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: vault-tls-secret
+            kind: Secret
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              kubernetes.io/metadata.name: vault

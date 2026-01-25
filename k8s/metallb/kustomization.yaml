@@ -1,5 +1,0 @@
-kind: Kustomization
-resources:
-  - namespace.yaml
-  - pools.yaml
-  - crds.yaml
