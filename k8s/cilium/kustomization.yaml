@@ -2,3 +2,4 @@ kind: Kustomization
 resources:
   - pools.yaml
   - policy.yaml
+  - hubble-route.yaml
