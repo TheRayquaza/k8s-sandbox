@@ -3,10 +3,10 @@ kind: Application
 metadata:
   name: cert-manager
   namespace: argocd
-spec:
-  project: default
   annotations:
     argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
   destination:
     name: in-cluster
     namespace: cert-manager

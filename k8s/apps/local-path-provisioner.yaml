@@ -3,10 +3,10 @@ kind: Application
 metadata:
   name: local-path-provisioner
   namespace: argocd
-spec:
-  project: default
   annotations:
     argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
   destination:
     name: in-cluster
     namespace: local-path-provisioner

@@ -3,10 +3,10 @@ kind: Application
 metadata:
   name: vault
   namespace: argocd
-spec:
-  project: default
   annotations:
     argocd.argoproj.io/sync-wave: "1" # after es
+spec:
+  project: default
   destination:
     name: in-cluster
     namespace: vault
