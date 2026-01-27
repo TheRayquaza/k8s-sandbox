@@ -122,7 +122,7 @@ spec:
               enableBPFClockProbe: false
 
               datapathMode: veth
-              enableTCX: true
+              enableTCX: false
 
           # -------------------------------------------------------------------
           # CNI
