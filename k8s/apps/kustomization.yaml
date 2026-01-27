@@ -11,3 +11,4 @@ resources:
   - system.yaml
   - local-path-provisioner.yaml
   - pinchflat.yaml
+  - immich.yaml

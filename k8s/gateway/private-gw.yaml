@@ -72,3 +72,19 @@ spec:
           selector:
             matchLabels:
               kubernetes.io/metadata.name: pinchflat
+
+    - name: immich-https
+      port: 443
+      protocol: HTTPS
+      hostname: "immich.internal.rayq.app"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: immich-tls-secret
+            kind: Secret
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              kubernetes.io/metadata.name: immich

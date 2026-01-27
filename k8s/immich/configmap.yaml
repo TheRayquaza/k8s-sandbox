@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-config
+  namespace: immich
+data:
+  DB_HOSTNAME: "immich-postgres"
+  DB_USERNAME: "postgres"
+  DB_DATABASE_NAME: "immich"
+  REDIS_HOSTNAME: "immich-redis"
+  IMMICH_VERSION: "release"

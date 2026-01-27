@@ -2,6 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: pinchflat-service
+  namespace: pinchflat
   labels:
     app: pinchflat
 spec:
