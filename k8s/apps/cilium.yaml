@@ -37,35 +37,10 @@ spec:
               enabled: true
 
           # -------------------------------------------------------------------
-          # NodePort / Services
-          # -------------------------------------------------------------------
-          nodePort:
-            enableHealthCheck: true
-            enableHealthCheckLoadBalancerIP: false
-            bindProtection: true
-          serviceNoBackendResponse: reject
-
-          enableInternalTrafficPolicy: true
-          
-          # -------------------------------------------------------------------
           # Gateway API
           # -------------------------------------------------------------------
           gatewayAPI:
             enabled: true
-
-          # -------------------------------------------------------------------
-          # Core cluster identity
-          # -------------------------------------------------------------------
-          cluster:
-            id: 0
-            name: home
-
-          # -------------------------------------------------------------------
-          # Kubernetes integration
-          # -------------------------------------------------------------------
-          k8s:
-            requireIPv4PodCIDR: false
-            requireIPv6PodCIDR: false
 
           # -------------------------------------------------------------------
           # kube-proxy replacement
@@ -75,111 +50,10 @@ spec:
           k8sServicePort: "6443"
 
           # -------------------------------------------------------------------
-          # IPAM
-          # -------------------------------------------------------------------
-          ipam:
-            mode: cluster-pool
-            operator:
-              clusterPoolIPv4PodCIDRList: ["10.244.0.0/16"]
-              clusterPoolIPv4MaskSize: 24
-
-          ipv4NativeRoutingCIDR: 10.0.0.0/8
-
-          # -------------------------------------------------------------------
-          # Networking mode
-          # -------------------------------------------------------------------
-          routingMode: "native"
-          # tunnel: "disabled"
-          autoDirectNodeRoutes: true
-
-          # -------------------------------------------------------------------
-          # IPv4 / IPv6
-          # -------------------------------------------------------------------
-          enableIPv4: true
-          enableIPv6: false
-
-          enableIPv4Masquerade: true
-          enableIPv6Masquerade: false
-
-          # -------------------------------------------------------------------
           # BPF & datapath
           # -------------------------------------------------------------------
           bpf:
-            root: /sys/fs/bpf
             masquerade: true
-            mapDynamicSizeRatio: 0.0025
-            preallocateMaps: false
-            lb:
-              acceleration: disabled
-              mapMax: 65536
-              algorithmAnnotation: false
-              modeAnnotation: false
-              sock: false
-              externalClusterIP: false
-              sourceRangeAllTypes: false
-
-              enableBPFMasquerade: true
-              enableBPFClockProbe: false
-
-              datapathMode: veth
-              enableTCX: false
-
-          # -------------------------------------------------------------------
-          # CNI
-          # -------------------------------------------------------------------
-          cni:
-            exclusive: true
-            customConf: false
-            logFile: /var/run/cilium/cilium-cni.log
-            writeCNIConfWhenReady: /host/etc/cni/net.d/05-cilium.conflist
-
-          # -------------------------------------------------------------------
-          # Policy
-          # -------------------------------------------------------------------
-          k8sNetworkPolicy:
-            enabled: true
-          enableNonDefaultDenyPolicies: true
-          daemon:
-            enableSourceIPVerification: true
-
-          # -------------------------------------------------------------------
-          # Node handling
-          # -------------------------------------------------------------------
-          agentNotReadyTaintKey: node.cilium.io/agent-not-ready
-          synchronizeK8sNodes: true
-
-          # -------------------------------------------------------------------
-          # Masquerading & iptables
-          # -------------------------------------------------------------------
-          iptablesRandomFully: false
-          installNoConntrackIptablesRules: false
-
-          # -------------------------------------------------------------------
-          # L7 / Envoy
-          # -------------------------------------------------------------------
-          l7Proxy: true
-
-          envoy:
-            baseID: 0
-            accessLogBufferSize: 4096
-            keepCapNetBindService: false
-
-          # -------------------------------------------------------------------
-          # DNS proxy / FQDN
-          # -------------------------------------------------------------------
-          dnsProxy:
-            socketLingerTimeout: 10
-
-          # -------------------------------------------------------------------
-          # Identity management
-          # -------------------------------------------------------------------
-          identityAllocationMode: crd
-          identityManagementMode: agent
-
-          # -------------------------------------------------------------------
-          # Health checking
-          # -------------------------------------------------------------------
-          healthCheckICMPFailureThreshold: 3
 
           # -------------------------------------------------------------------
           # Metrics & monitoring
@@ -193,12 +67,6 @@ spec:
           operator:
             replicas: 1
             nodeGCInterval: 5m
-
-          # -------------------------------------------------------------------
-          # SCTP / VTEP
-          # -------------------------------------------------------------------
-          enableSCTP: false
-          enableVTEP: false
 
           # -------------------------------------------------------------------
           # Miscellaneous
