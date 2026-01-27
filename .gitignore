@@ -5,6 +5,7 @@ ansible/inventories/
 ansible/kubeconfigs/
 ansible/host_vars/
 ansible/group_vars/
+ansible/static
 
 # Terraform directories
 terraform/**/.terraform/

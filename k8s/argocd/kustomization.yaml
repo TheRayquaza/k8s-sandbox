@@ -1,6 +1,7 @@
 kind: Kustomization
 resources:
   - route.yaml
+  - certificate.yaml
   - namespace.yaml
 
   - secret.yaml

@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: pinchflat-service
+  labels:
+    app: pinchflat
+spec:
+  type: ClusterIP
+  selector:
+    app: pinchflat
+  ports:
+    - protocol: TCP
+      port: 8945
+      targetPort: 8945

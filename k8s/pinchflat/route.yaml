@@ -1,0 +1,21 @@
+
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: pinchflat-route
+  namespace: pinchflat
+spec:
+  parentRefs:
+    - name: private-gateway
+      namespace: default
+      sectionName: pinchflat-https
+  hostnames:
+    - pinchflat.internal.rayq.app
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+      - name: pinchflat-service
+        port: 8945

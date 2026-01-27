@@ -1,0 +1,42 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: pinchflat-deployment
+  labels:
+    app: pinchflat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pinchflat
+  template:
+    metadata:
+      labels:
+        app: pinchflat
+    spec:
+      containers:
+        - name: pinchflat
+          image: docker.io/keglin/pinchflat:v2025.6.6
+          ports:
+            - containerPort: 8945
+          volumeMounts:
+            - name: pinchflat-config
+              mountPath: /config
+            - name: pinchflat-downloads
+              mountPath: /downloads
+          env:
+            - name: TZ
+              value: Europe/Paris
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+      volumes:
+        - name: pinchflat-config
+          persistentVolumeClaim:
+            claimName: pinchflat-pvc
+        - name: pinchflat-downloads
+          emptyDir: {}

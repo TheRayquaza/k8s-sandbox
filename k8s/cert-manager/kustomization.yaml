@@ -3,6 +3,5 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - cluster-issuer.yaml
-  - certificate.yaml
   - secret.yaml
 #  - network.yaml
