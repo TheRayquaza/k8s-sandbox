@@ -10,3 +10,4 @@ resources:
   - gateway.yaml
   - system.yaml
   - local-path-provisioner.yaml
+  - pinchflat.yaml

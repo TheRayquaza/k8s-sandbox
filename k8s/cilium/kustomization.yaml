@@ -3,3 +3,4 @@ resources:
   - pools.yaml
   - policy.yaml
   - hubble-route.yaml
+  - hubble-certificate.yaml
