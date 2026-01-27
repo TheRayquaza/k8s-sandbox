@@ -58,7 +58,7 @@ spec:
           # -------------------------------------------------------------------
           cluster:
             id: 0
-            name: default
+            name: home
 
           # -------------------------------------------------------------------
           # Kubernetes integration
@@ -89,9 +89,9 @@ spec:
           # -------------------------------------------------------------------
           # Networking mode
           # -------------------------------------------------------------------
-          routingMode: tunnel
-          tunnelProtocol: vxlan
-          autoDirectNodeRoutes: false
+          routingMode: ""
+          # tunnelProtocol: vxlan
+          autoDirectNodeRoutes: true
           directRoutingSkipUnreachable: false
 
           # -------------------------------------------------------------------
