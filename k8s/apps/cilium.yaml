@@ -71,7 +71,6 @@ spec:
           # kube-proxy replacement
           # -------------------------------------------------------------------
           kubeProxyReplacement: true
-          # k8sServiceHost: auto
           k8sServiceHost: "10.20.0.1"
           k8sServicePort: "6443"
 
@@ -89,10 +88,9 @@ spec:
           # -------------------------------------------------------------------
           # Networking mode
           # -------------------------------------------------------------------
-          routingMode: ""
-          # tunnelProtocol: vxlan
+          routingMode: "native"
+          # tunnel: "disabled"
           autoDirectNodeRoutes: true
-          directRoutingSkipUnreachable: false
 
           # -------------------------------------------------------------------
           # IPv4 / IPv6
